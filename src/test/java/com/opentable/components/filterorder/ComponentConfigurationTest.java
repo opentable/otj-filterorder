@@ -1,4 +1,4 @@
-package com.opentable.components;
+package com.opentable.components.filterorder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

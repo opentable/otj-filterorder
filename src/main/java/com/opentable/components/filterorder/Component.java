@@ -1,4 +1,4 @@
-package com.opentable.components;
+package com.opentable.components.filterorder;
 
 /**
  * A simple Spring managed bean.

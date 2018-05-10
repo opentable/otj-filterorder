@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import org.assertj.core.api.Assertions;
@@ -86,6 +87,18 @@ public class CycleFinderTest {
                         "a", Collections.singletonList("b"),
                         "c", Collections.singletonList("b")
 
+                )
+        ).run();
+        Assertions.assertThat(cycle).isNotPresent();
+    }
+
+    @Test
+    public void testNonTrivial() {
+        final Optional<List<String>> cycle = new CycleFinder<>(
+                ImmutableMap.of(
+                        "d", Collections.singletonList("a"),
+                        "a", ImmutableList.of("b", "c"),
+                        "c", Collections.singletonList("b")
                 )
         ).run();
         Assertions.assertThat(cycle).isNotPresent();

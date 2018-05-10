@@ -20,6 +20,11 @@ import javax.servlet.Filter;
  * container.  Either specify that a filter comes last (there may be only one of these), or that a filter
  * <em>depends on</em> another (i.e., a filter must come after another).
  *
+ * <p>
+ * Note that this implementation uses the {@link Filter} classes themselves to declare dependencies. So if there are
+ * multiple filters in your chain of the same class (e.g., with different configurations), this limits the
+ * expressiveness of this library.
+ *
  * @see FilterOrderResolver
  */
 public final class OrderDeclaration {

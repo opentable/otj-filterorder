@@ -89,7 +89,7 @@ public class FilterOrderResolver {
                     .add(od.dependsOn);
         });
         if (last.size() != 1) {
-            throw new IllegalStateException(String.format("multiple last filters: %s", last));
+            throw new IllegalStateException(String.format("multiple filters declared to come last: %s", last));
         }
         final Optional<List<Class<? extends Filter>>> cycle = new CycleFinder<>(dependencies).run();
         if (cycle.isPresent()) {

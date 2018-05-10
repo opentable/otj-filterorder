@@ -28,14 +28,14 @@ import javax.servlet.Filter;
  * @see FilterOrderResolver
  */
 public final class OrderDeclaration {
-    final boolean last;
+    final boolean isLast;
     final Class<? extends Filter> filter, dependsOn;
 
     OrderDeclaration(
-            final boolean last,
+            final boolean isLast,
             final Class<? extends Filter> filter,
             final Class<? extends Filter> dependsOn) {
-        this.last = last;
+        this.isLast = isLast;
         this.filter = filter;
         this.dependsOn = dependsOn;
     }

@@ -80,7 +80,7 @@ public class FilterOrderResolver {
         final Set<Class<? extends Filter>> last = new HashSet<>();
         final Map<Class<? extends Filter>, Collection<Class<? extends Filter>>> dependencies = new HashMap<>();
         orderDeclarations.forEach(od -> {
-            if (od.last) {
+            if (od.isLast) {
                 last.add(od.filter);
                 return;
             }

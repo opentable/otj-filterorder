@@ -89,11 +89,11 @@ public class FilterOrderResolver {
                     .add(od.dependsOn);
         });
         if (last.size() != 1) {
-            throw new RuntimeException(String.format("multiple last filters: %s", last));
+            throw new IllegalStateException(String.format("multiple last filters: %s", last));
         }
         final Optional<List<Class<? extends Filter>>> cycle = new CycleFinder<>(dependencies).run();
         if (cycle.isPresent()) {
-            throw new RuntimeException(String.format("filter cycle detected: %s", cycle.get()));
+            throw new IllegalStateException(String.format("filter cycle detected: %s", cycle.get()));
         }
         final List<FilterRegistrationBean<?>> sorted = new ArrayList<>(filterRegistrationBeans);
         sorted.sort((frb1, frb2) -> {

@@ -38,22 +38,13 @@ class CycleFinder<T> {
     /** Return a list of cyclic nodes, if there is one, otherwise empty. */
     Optional<List<T>> run() {
         for (final T node : edges.keySet()) {
-            final Optional<List<T>> cycle = dfs(node);
-            if (cycle.isPresent()) {
-                return cycle;
+            seen.clear();
+            final List<T> cycle = findCycle(node);
+            if (!cycle.isEmpty()) {
+                return Optional.of(cycle);
             }
         }
         return Optional.empty();
-    }
-
-    /** Kick off the DFS and massage the return type. */
-    private Optional<List<T>> dfs(final T start) {
-        seen.clear();
-        final List<T> cycle = findCycle(start);
-        if (cycle.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(cycle);
     }
 
     /** Recursive DFS. */

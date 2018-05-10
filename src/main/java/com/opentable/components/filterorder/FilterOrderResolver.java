@@ -39,7 +39,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
  * The total ordering is as follows.
  * If there is a last filter, it comes last.
  * Before that come filters for which an order was declared, in the order resolved by this class.
- * Finally, first come the filters for which no order was declared, in original injection order.
+ * First come the filters for which no order was declared, in original injection order.
  *
  * <p>
  * If more than one last filter is declared, or if the order declarations create a cycle, {@link #resolve} throws

@@ -86,7 +86,6 @@ public class CycleFinderTest {
                 ImmutableMap.of(
                         "a", Collections.singletonList("b"),
                         "c", Collections.singletonList("b")
-
                 )
         ).run();
         Assertions.assertThat(cycle).isNotPresent();

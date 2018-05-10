@@ -55,6 +55,7 @@ public final class OrderDeclaration {
             this.filter = filter;
         }
 
+        /** In other words, {@link #filter} will &ldquo;come after&rdquo; the param {@code filter} here. */
         public OrderDeclaration dependsOn(final Class<? extends Filter> filter) {
             return new OrderDeclaration(false, this.filter, filter);
         }

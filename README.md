@@ -6,7 +6,7 @@ Here is an sample use.  In it, B is said to depend on A, so in the final
 ordering, A will come before B.
 
     @Bean
-    public OrderDeclaration testOrderDeclaration() {
+    public OrderDeclaration sampleOrderDeclaration() {
         return OrderDeclaration
                 .of(FilterB.class)
                 .dependsOn(FilterA.class);

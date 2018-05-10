@@ -58,9 +58,5 @@ public final class OrderDeclaration {
         public OrderDeclaration dependsOn(final Class<? extends Filter> filter) {
             return new OrderDeclaration(false, this.filter, filter);
         }
-
-        public OrderDeclaration comesAfter(final Class<? extends Filter> filter) {
-            return dependsOn(filter);
-        }
     }
 }

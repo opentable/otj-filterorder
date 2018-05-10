@@ -19,6 +19,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
+/**
+ * {@link FilterOrderResolver} resolves the order of servlet filters according to injected {@link OrderDeclaration}s.
+ *
+ * <p>
+ * The total ordering is as follows.
+ * If there is a last filter, it comes last.
+ * Before that come filters for which an order was declared, in the order resolved by this class.
+ * Finally, first come the filters for which no order was declared, in original injection order.
+ *
+ * <p>
+ * If more than one last filter is declared, or if the order declarations create a cycle, {@link #resolve} throws
+ * a runtime exception with helpful diagnostic information.
+ *
+ * <p>
+ * Inject this just before you initialize the servlet container. It will call
+ * {@link FilterRegistrationBean#setOrder}} on the beans to enforce their order.
+ *
+ * @see OrderDeclaration
+ */
 public class FilterOrderResolver {
     private static final Logger LOG = LoggerFactory.getLogger(FilterOrderResolver.class);
 

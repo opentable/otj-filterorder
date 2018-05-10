@@ -9,6 +9,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Given a mapping of graph nodes to other nodes (&ldquo;edges&rdquo;), call {@link #run} to find a cycle, if there
+ * is one.
+ * @param <T> node type
+ */
 class CycleFinder<T> {
     private final Set<T> seen = new HashSet<>();
     private final Map<T, Collection<T>> edges;
@@ -17,6 +22,7 @@ class CycleFinder<T> {
         this.edges = edges;
     }
 
+    /** Return a list of cyclic nodes, if there is one, otherwise empty. */
     Optional<List<T>> run() {
         for (final T node : edges.keySet()) {
             final Optional<List<T>> cycle = dfs(node);
@@ -27,6 +33,7 @@ class CycleFinder<T> {
         return Optional.empty();
     }
 
+    /** Kick off the DFS and massage the return type. */
     private Optional<List<T>> dfs(final T start) {
         seen.clear();
         final List<T> cycle = findCycle(start);
@@ -36,6 +43,7 @@ class CycleFinder<T> {
         return Optional.of(cycle);
     }
 
+    /** Recursive DFS. */
     private List<T> findCycle(final T node) {
         boolean newlySeen = seen.add(node);
         if (!newlySeen) {
@@ -51,7 +59,8 @@ class CycleFinder<T> {
                 cycle.add(node);
                 return cycle;
             }
-            // If no cycle found in the just-finished recursion, remove from seen
+            // If no cycle found in the just-finished recursion, remove from seen to avoid mis-identifying cycle across
+            // separate DFS traversals that happen to share a node.
             seen.remove(next);
         }
         // No cycle found at this point.

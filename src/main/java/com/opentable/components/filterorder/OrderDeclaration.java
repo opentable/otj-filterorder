@@ -28,14 +28,14 @@ import javax.servlet.Filter;
  * @see FilterOrderResolver
  */
 public final class OrderDeclaration {
-    final boolean last;
+    final boolean isLast;
     final Class<? extends Filter> filter, dependsOn;
 
     OrderDeclaration(
-            final boolean last,
+            final boolean isLast,
             final Class<? extends Filter> filter,
             final Class<? extends Filter> dependsOn) {
-        this.last = last;
+        this.isLast = isLast;
         this.filter = filter;
         this.dependsOn = dependsOn;
     }
@@ -55,6 +55,7 @@ public final class OrderDeclaration {
             this.filter = filter;
         }
 
+        /** In other words, {@link #filter} will &ldquo;come after&rdquo; the param {@code filter} here. */
         public OrderDeclaration dependsOn(final Class<? extends Filter> filter) {
             return new OrderDeclaration(false, this.filter, filter);
         }

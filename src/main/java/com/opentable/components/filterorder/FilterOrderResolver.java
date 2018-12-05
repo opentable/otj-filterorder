@@ -16,6 +16,7 @@ package com.opentable.components.filterorder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -75,8 +76,14 @@ public class FilterOrderResolver {
         final Map<FilterRegistrationBean<?>, Integer> originalIndexes = new HashMap<>();
         for (int i = 0; i < filterRegistrationBeans.size(); ++i) {
             final FilterRegistrationBean<?> frb = filterRegistrationBeans.get(i);
-            originalIndexes.put(frb, i);
+            originalIndexes.put(frb, frb.getOrder());
         }
+        LOG.info("Original order of {} filter{}: {}", originalIndexes.size(), originalIndexes.size() != 1 ? "s" : "",
+            originalIndexes.keySet().stream()
+                .sorted(Comparator.comparingInt(i -> i.getOrder()))
+                .map(FilterRegistrationBean::getFilter).collect(Collectors.toList()));
+
+
         final Set<Class<? extends Filter>> last = new HashSet<>();
         final Map<Class<? extends Filter>, Collection<Class<? extends Filter>>> dependencies = new HashMap<>();
         orderDeclarations.forEach(od -> {
@@ -88,13 +95,14 @@ public class FilterOrderResolver {
                     .computeIfAbsent(od.filter, f -> new HashSet<>())
                     .add(od.dependsOn);
         });
-        if (last.size() != 1) {
+        if (last.size() > 1) {
             throw new IllegalStateException(String.format("multiple filters declared to come last: %s", last));
         }
         final Optional<List<Class<? extends Filter>>> cycle = new CycleFinder<>(dependencies).run();
         if (cycle.isPresent()) {
             throw new IllegalStateException(String.format("filter cycle detected: %s", cycle.get()));
         }
+
         final List<FilterRegistrationBean<?>> sorted = new ArrayList<>(filterRegistrationBeans);
         sorted.sort((frb1, frb2) -> {
             final Class<? extends Filter> f1 = frb1.getFilter().getClass();

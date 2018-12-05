@@ -1,3 +1,8 @@
+0.0.4
+-----
+* More carefully preserve order of filters
+* Remove hard dependency on "last"
+
 0.0.3
 -----
 - Improved documentation.

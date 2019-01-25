@@ -26,12 +26,12 @@
     <connection>scm:git:git://github.com/opentable/${project.artifactId}.git</connection>
     <developerConnection>scm:git:git@github.com:opentable/${project.artifactId}.git</developerConnection>
     <url>http://github.com/opentable/${project.artifactId}</url>
-    <tag>otj-filterorder-0.0.5</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <groupId>com.opentable.components</groupId>
   <artifactId>otj-filterorder</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6-SNAPSHOT</version>
   <description>Servlet filter order resolution</description>
 
   <dependencies>

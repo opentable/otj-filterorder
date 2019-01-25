@@ -29,7 +29,8 @@ import javax.servlet.Filter;
  */
 public final class OrderDeclaration {
     final boolean isLast;
-    final Class<? extends Filter> filter, dependsOn;
+    final Class<? extends Filter> filter;
+    final Class<? extends Filter> dependsOn;
 
     OrderDeclaration(
             final boolean isLast,

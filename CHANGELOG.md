@@ -1,3 +1,7 @@
+5.2.0
+-----
+* Recompile for Spring 5.2
+
 0.0.4
 -----
 * More carefully preserve order of filters

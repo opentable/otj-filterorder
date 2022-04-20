@@ -19,7 +19,7 @@
   <parent>
     <groupId>com.opentable</groupId>
     <artifactId>otj-parent-spring</artifactId>
-    <version>253</version>
+    <version>328</version>
   </parent>
 
   <scm>
@@ -33,13 +33,6 @@
   <artifactId>otj-filterorder</artifactId>
   <version>5.2.1-SNAPSHOT</version>
   <description>Servlet filter order resolution</description>
-
-  <properties>
-    <!-- Remove once parent updated -->
-    <dep.spring-boot.version>2.2.7.RELEASE</dep.spring-boot.version>
-    <dep.spring.version>5.2.6.RELEASE</dep.spring.version>
-    <dep.spring-security.version>5.2.4.RELEASE</dep.spring-security.version>
-  </properties>
 
   <dependencies>
     <dependency>
